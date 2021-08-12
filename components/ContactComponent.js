@@ -3,7 +3,7 @@ import { ScrollView, Text } from 'react-native';
 import { Card, Button, Icon } from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
 import * as MailComposer from 'expo-mail-composer';
-
+import * as Haptics from 'expo-haptics';
 
 class Contact extends Component {
 
@@ -49,7 +49,13 @@ class Contact extends Component {
                                 color='#fff'
                                 iconStyle={{ marginRight: 10 }}
                             />}
-                            onPress={() => this.sendMail()}
+                            onPress={() => {
+                                return (
+                                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light),
+                                    this.sendMail()
+                                )
+                            }
+                            }
                         />
                     </Card>
                 </Animatable.View>
